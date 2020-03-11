@@ -1,0 +1,67 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class road : MonoBehaviour
+{
+    public float pi = 3.14f;
+    public float angleY;
+    public GameObject red_square;
+    public GameObject pink_square;
+
+    public float red_sq_pos_x;
+    public float pink_sq_pos_x;
+
+    private void Update()
+    {
+
+        pink_square = GameObject.Find("ImageTarget school");
+        red_square = GameObject.Find("ImageTarget red house");
+
+        if (red_square.transform.position.x < 0)
+        {
+            red_sq_pos_x = -red_square.transform.position.x;
+        }
+        else
+        {
+            red_sq_pos_x = red_square.transform.position.x;
+        }
+
+        if (pink_square.transform.position.x < 0)
+        {
+            pink_sq_pos_x = -pink_square.transform.position.x;
+        }
+        else
+        {
+            pink_sq_pos_x = pink_square.transform.position.x;
+        }
+
+        gameObject.transform.position = new Vector3((red_square.transform.position.x + pink_square.transform.position.x) / 2, 0, (red_square.transform.position.z + pink_square.transform.position.z) / 2);
+
+        gameObject.transform.localScale = new Vector3(Mathf.Sqrt((red_square.transform.position.x - pink_square.transform.position.x) * (red_square.transform.position.x - pink_square.transform.position.x) + (red_square.transform.position.z - pink_square.transform.position.z) * (red_square.transform.position.z - pink_square.transform.position.z)), 0.025f, 1f);
+
+        if (red_square.transform.position.z < pink_square.transform.position.z)
+        {
+            angleY = (red_square.transform.position.z - pink_square.transform.position.z) / Mathf.Sqrt((red_square.transform.position.x - pink_square.transform.position.x) * (red_square.transform.position.x - pink_square.transform.position.x) + (red_square.transform.position.z - pink_square.transform.position.z) * (red_square.transform.position.z - pink_square.transform.position.z)) / 3.14f * 180;
+        }
+        else
+        {
+            angleY = (pink_square.transform.position.z - red_square.transform.position.z) / Mathf.Sqrt((red_square.transform.position.x - pink_square.transform.position.x) * (red_square.transform.position.x - pink_square.transform.position.x) + (red_square.transform.position.z - pink_square.transform.position.z) * (red_square.transform.position.z - pink_square.transform.position.z)) / 3.14f * 180;
+        }
+        Debug.Log(angleY);
+
+        if (red_square.transform.position.x < pink_square.transform.position.x)
+        {
+            angleY = (red_square.transform.position.z - pink_square.transform.position.z) / Mathf.Sqrt((red_square.transform.position.x - pink_square.transform.position.x) * (red_square.transform.position.x - pink_square.transform.position.x) + (red_square.transform.position.z - pink_square.transform.position.z) * (red_square.transform.position.z - pink_square.transform.position.z)) / 3.14f * 180;
+        }
+        else
+        {
+            angleY = (pink_square.transform.position.z - red_square.transform.position.z) / Mathf.Sqrt((red_square.transform.position.x - pink_square.transform.position.x) * (red_square.transform.position.x - pink_square.transform.position.x) + (red_square.transform.position.z - pink_square.transform.position.z) * (red_square.transform.position.z - pink_square.transform.position.z)) / 3.14f * 180;
+        }
+
+
+        transform.eulerAngles = new Vector3(0, angleY, 0);
+
+    }
+
+}

@@ -1,0 +1,24 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class button : MonoBehaviour
+{
+
+    public bool button_controller = false;
+    public GameObject road;
+
+    public void on_of()
+    {
+        button_controller = !button_controller;
+        if(button_controller == true)
+        {
+            road.SetActive(true);
+        }
+        else
+        {
+            road.SetActive(false);
+        }
+    }
+
+}
